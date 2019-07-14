@@ -3,7 +3,7 @@ package com.nuclominus.testapptab.base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public abstract class ActivityBase extends AppCompatActivity {
+public abstract class ActivityBase extends AppCompatActivity{
     private TabFragmentAdapterBase _tabAdapter;
 
     protected TabFragmentAdapterBase createTabAdapter() {
@@ -17,22 +17,16 @@ public abstract class ActivityBase extends AppCompatActivity {
         return _tabAdapter;
     }
 
-    @SuppressWarnings("unchecked")
-    protected <T extends FragmentTabsBase> T getCurrentTab() {
-        TabFragmentAdapterBase adapter = _tabAdapter;
-        return adapter == null ? null : (T) adapter.getCurrentFragment();
+    protected void selectTab(String fragmentTag) {
+        selectTab(fragmentTag, null);
     }
 
-    protected boolean selectTab(String fragmentTag) {
-        return selectTab(fragmentTag, null);
+    protected void selectTab(String fragmentTag, Bundle fragmentState) {
+        selectTab(fragmentTag, fragmentState, false);
     }
 
-    protected boolean selectTab(String fragmentTag, Bundle fragmentState) {
-        return selectTab(fragmentTag, fragmentState, false);
-    }
-
-    protected boolean selectTab(String fragmentTag, Bundle fragmentState, boolean replace) {
-        return getTabAdapter().selectTab(fragmentTag, fragmentState, replace);
+    protected void selectTab(String fragmentTag, Bundle fragmentState, boolean replace) {
+        getTabAdapter().selectTab(fragmentTag, fragmentState, replace);
     }
 
     @Override

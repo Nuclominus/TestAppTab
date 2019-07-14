@@ -6,12 +6,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.nuclominus.testapptab.ui.tabs.viewmodel.DataViewModel;
+
 public class FragmentTabsBase extends Fragment {
 
     public static final String NESTED_FRAGMENTS = "nestedFragments";
 
     private TabFragmentAdapterBase _tabsAdapter;
-    private IFragmentCallback _activityCallback;
+    private FragmentTabCallback _activityCallback;
 
 
     protected TabFragmentAdapterBase createTabAdapter() {
@@ -104,7 +106,7 @@ public class FragmentTabsBase extends Fragment {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends IFragmentCallback> T getActivityCallback() {
+    public <T extends FragmentTabCallback> T getActivityCallback() {
         return (T) _activityCallback;
     }
 
@@ -128,14 +130,15 @@ public class FragmentTabsBase extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            if (context instanceof IFragmentCallback) {
-                _activityCallback = (IFragmentCallback) context;
+            if (context instanceof FragmentTabCallback) {
+                _activityCallback = (FragmentTabCallback) context;
             }
         } catch (Exception ex) {
             //nothing to do
         }
     }
 
-    public interface IFragmentCallback {
+    public interface FragmentTabCallback {
+        DataViewModel getViewModel();
     }
 }

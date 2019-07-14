@@ -4,7 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/pnlContent"
-    tools:context=".tabs.activity.TabActivity">
+    tools:context=".ui.tabs.activity.MainTabActivity">
 
+    <FrameLayout
+        android:id="@+id/pnlContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tabLayout"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true">
+
+        <android.support.design.widget.TabItem
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/tab_one"/>
+
+        <android.support.design.widget.TabItem
+            android:text="@string/tab_second"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+    </android.support.design.widget.TabLayout>
 </RelativeLayout>
