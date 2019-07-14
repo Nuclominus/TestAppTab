@@ -29,13 +29,13 @@ public abstract class TabFragmentAdapterBase {
         _currentFragment = (FragmentTabsBase) _fm.findFragmentByTag(fragmentTag);
     }
 
-    boolean selectTab(String fragmentTag, Bundle fragmentState, boolean replace){
+    void selectTab(String fragmentTag, Bundle fragmentState, boolean replace){
 
         FragmentManager fragmentManager = _fm;
         String previousTag = null;
         if(_currentFragment != null){
             if(!_currentFragment.deactivateTab()){
-                return false;
+                return;
             }
             previousTag = _currentFragment.getTag();
         }
@@ -48,7 +48,7 @@ public abstract class TabFragmentAdapterBase {
         }
 
         if(newFragment == null) {
-            return false;
+            return;
         }
 
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -76,7 +76,6 @@ public abstract class TabFragmentAdapterBase {
             }
         }
         _currentFragment = newFragment;
-        return true;
     }
 
     private void initTransaction(FragmentTransaction ft, Fragment currentFragment, Fragment newFragment, String newFragmentTag){
