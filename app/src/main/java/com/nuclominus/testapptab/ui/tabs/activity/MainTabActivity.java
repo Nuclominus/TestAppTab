@@ -13,31 +13,34 @@ import com.nuclominus.testapptab.ui.tabs.tab_adapters.MainTabAdapter;
 import com.nuclominus.testapptab.ui.tabs.viewmodel.DataViewModel;
 import com.nuclominus.testapptab.utility.EventArgs;
 
-public class MainTabActivity extends ActivityBase implements TabLayout.OnTabSelectedListener, FragmentTabsBase.FragmentTabCallback{
+public class MainTabActivity extends ActivityBase implements TabLayout.OnTabSelectedListener, FragmentTabsBase.FragmentTabCallback {
 
+    private static final String ACTIVE_TAB = "active_tab";
     public static final String TAB_FRAGMENT_LIST_CATS = "tab_fragment_list_cats";
     public static final String TAB_FRAGMENT_LIST_DOG = "tab_fragment_list_dog";
     public static final String TAB_FRAGMENT_DETAILS = "tab_fragment_details";
 
-    private DataViewModel vm;
+    private DataViewModel _vm;
+    private TabLayout _tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            setContentView(R.layout.activity_main);
-            initViews();
-            setupViewModel();
+        setContentView(R.layout.activity_main);
+        initViews();
+        setupViewModel();
+
+        if (savedInstanceState == null)
             selectTab(TAB_FRAGMENT_LIST_CATS, getBundleParam(DataType.CAT));
-        }
     }
 
     private void initViews() {
-        ((TabLayout) findViewById(R.id.tabLayout)).addOnTabSelectedListener(this);
+        _tabLayout = findViewById(R.id.tabLayout);
+        _tabLayout.addOnTabSelectedListener(this);
     }
 
-    private void setupViewModel(){
-        vm = ViewModelProviders.of(this).get(DataViewModel.class);
+    private void setupViewModel() {
+        _vm = ViewModelProviders.of(this).get(DataViewModel.class);
     }
 
     @Override
@@ -63,17 +66,34 @@ public class MainTabActivity extends ActivityBase implements TabLayout.OnTabSele
     }
 
     @Override
-    public void onTabUnselected(TabLayout.Tab tab) {}
+    public void onTabUnselected(TabLayout.Tab tab) {
+    }
 
     @Override
-    public void onTabReselected(TabLayout.Tab tab) {}
+    public void onTabReselected(TabLayout.Tab tab) {
+    }
 
     @Override
     public DataViewModel getViewModel() {
-        return vm;
+        return _vm;
     }
 
-    private Bundle getBundleParam(int param){
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(ACTIVE_TAB, _tabLayout.getSelectedTabPosition());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        int position = savedInstanceState.getInt(ACTIVE_TAB);
+        TabLayout.Tab tab = _tabLayout.getTabAt(position);
+        if (tab != null)
+            tab.select();
+    }
+
+    private Bundle getBundleParam(int param) {
         Bundle result = new Bundle();
         result.putInt(EventArgs.RequestType, param);
         return result;

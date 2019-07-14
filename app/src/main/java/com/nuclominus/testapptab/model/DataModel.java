@@ -2,7 +2,7 @@ package com.nuclominus.testapptab.model;
 
 import com.nuclominus.testapptab.api.pojo.ItemEntry;
 import com.nuclominus.testapptab.factory.ViewFactoryDataList;
-import com.nuclominus.testapptab.utility.PicassoHelper;
+import com.nuclominus.testapptab.utility.picasso.PicassoHelper;
 import com.nuclominus.testapptab.view_controller.IViewData;
 
 public class DataModel implements IDataModel {

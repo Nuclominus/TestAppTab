@@ -8,24 +8,24 @@ import java.util.List;
 public class DataEntry {
     @SerializedName("message")
     @Expose
-    private String message;
+    private String _message;
     @SerializedName("data")
     @Expose
-    private List<ItemEntry> data = null;
+    private List<ItemEntry> _data = null;
 
     public String getMessage() {
-        return message;
+        return _message;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        _message = message;
     }
 
     public List<ItemEntry> getData() {
-        return data;
+        return _data;
     }
 
     public void setData(List<ItemEntry> data) {
-        this.data = data;
+        _data = data;
     }
 }

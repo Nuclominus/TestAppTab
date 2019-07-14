@@ -40,10 +40,6 @@ public abstract class AbstractSimpleAdapter<TView extends IViewControllerBase<TM
         return _factory;
     }
 
-    private List<TModel> getItems() {
-        return _items;
-    }
-
     @Override
     public long getItemId(int position){
         return RecyclerView.NO_ID;
@@ -107,16 +103,16 @@ public abstract class AbstractSimpleAdapter<TView extends IViewControllerBase<TM
         mergeItems(items, null);
     }
 
-    public void mergeItems(final List<TModel> items, ListUpdateCallback callback) {
+    private void mergeItems(final List<TModel> items, ListUpdateCallback callback) {
         mergeItems(items, callback, false);
     }
 
-    void replaceItems(List<TModel> items){
+    private void replaceItems(List<TModel> items){
         _items.clear();
         _items.addAll(items);
     }
 
-    public void mergeItems(final List<TModel> items, ListUpdateCallback callback, boolean detectMoves) {
+    private void mergeItems(final List<TModel> items, ListUpdateCallback callback, boolean detectMoves) {
         DiffResultCallback<TModel> diffCallback = getDiffCallback(new ArrayList<>(this._items), items);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback, detectMoves);
         replaceItems(items);

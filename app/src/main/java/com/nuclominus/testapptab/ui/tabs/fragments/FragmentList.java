@@ -2,6 +2,7 @@ package com.nuclominus.testapptab.ui.tabs.fragments;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,8 +25,17 @@ import java.util.List;
 
 public class FragmentList extends FragmentTabsBase implements ViewData.ViewDataCallBack {
 
+    private static final String BUNDLE_RECYCLER_LAYOUT = "recycler_params";
     AttractionsRecyclerView _recyclerView;
     AdapterListData _adapter;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Bundle arguments = getArguments();
+        if (arguments != null)
+            initData(arguments.getInt(EventArgs.RequestType));
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,17 +45,14 @@ public class FragmentList extends FragmentTabsBase implements ViewData.ViewDataC
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         initViews(view);
-        Bundle arguments = getArguments();
-        if (arguments != null)
-            initData(arguments.getInt(EventArgs.RequestType));
     }
 
     private void initData(int type) {
         DataViewModel vm = getActivityCallback().getViewModel();
         MutableLiveData<List<IDataModel>> liveData = vm.getLiveData(type);
         if (liveData != null)
-            liveData.observe(this, dataModels -> _adapter.setItems(dataModels));
-        vm.loadDate(type);
+            liveData.observe(this, modes -> _adapter.mergeItems(modes));
+        vm.loadData(type);
     }
 
     private void initViews(View view) {
@@ -60,11 +67,21 @@ public class FragmentList extends FragmentTabsBase implements ViewData.ViewDataC
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        if (_recyclerView == null || _recyclerView.getLayoutManager() == null) return;
+
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, _recyclerView.getLayoutManager().onSaveInstanceState());
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle bundle) {
         super.onRestoreInstanceState(bundle);
+        if (_recyclerView == null || _recyclerView.getLayoutManager() == null || bundle == null)
+            return;
+
+        Parcelable listState = bundle.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+        if (listState != null) {
+            _recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+        }
     }
 
     @Override

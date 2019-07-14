@@ -29,10 +29,6 @@ public abstract class TabFragmentAdapterBase {
         _currentFragment = (FragmentTabsBase) _fm.findFragmentByTag(fragmentTag);
     }
 
-    public boolean selectTab(String fragmentTag){
-        return selectTab(fragmentTag, null, false);
-    }
-
     boolean selectTab(String fragmentTag, Bundle fragmentState, boolean replace){
 
         FragmentManager fragmentManager = _fm;

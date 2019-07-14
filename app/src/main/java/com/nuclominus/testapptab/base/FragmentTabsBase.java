@@ -37,9 +37,8 @@ public class FragmentTabsBase extends Fragment {
 
     protected void onTabActivated(Bundle args) {
         FragmentTabsBase currentTab = getCurrentTab();
-        if(currentTab != null) {
+        if (currentTab != null)
             currentTab.onTabActivated(args);
-        }
     }
 
     protected boolean onTabDeactivated() {
@@ -51,23 +50,6 @@ public class FragmentTabsBase extends Fragment {
     protected <T extends FragmentTabsBase> T getCurrentTab() {
         TabFragmentAdapterBase adapter = _tabsAdapter;
         return adapter == null ? null : (T) adapter.getCurrentFragment();
-    }
-
-    public boolean selectTab(String fragmentTag) {
-        return selectTab(fragmentTag, null);
-    }
-
-    public boolean selectTab(String fragmentTag, Bundle bundle) {
-        return selectTab(fragmentTag, bundle, false);
-    }
-
-    public boolean selectTab(String fragmentTag, Bundle bundle, boolean replace) {
-        boolean result = false;
-        TabFragmentAdapterBase adapter = getTabAdapter();
-        if (adapter != null) {
-            result = adapter.selectTab(fragmentTag, bundle, replace);
-        }
-        return result;
     }
 
     @Override
@@ -100,7 +82,7 @@ public class FragmentTabsBase extends Fragment {
         }
     }
 
-    public boolean onTabNavigation(){
+    public boolean onTabNavigation() {
         FragmentTabsBase currentTab = getCurrentTab();
         return currentTab != null && currentTab.onTabNavigation();
     }

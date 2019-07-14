@@ -17,16 +17,8 @@ public abstract class ActivityBase extends AppCompatActivity{
         return _tabAdapter;
     }
 
-    protected void selectTab(String fragmentTag) {
-        selectTab(fragmentTag, null);
-    }
-
     protected void selectTab(String fragmentTag, Bundle fragmentState) {
-        selectTab(fragmentTag, fragmentState, false);
-    }
-
-    protected void selectTab(String fragmentTag, Bundle fragmentState, boolean replace) {
-        getTabAdapter().selectTab(fragmentTag, fragmentState, replace);
+        getTabAdapter().selectTab(fragmentTag, fragmentState, false);
     }
 
     @Override

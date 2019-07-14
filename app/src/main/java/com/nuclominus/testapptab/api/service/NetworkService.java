@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkService {
     private static NetworkService INSTANCE;
-    private Retrofit retrofit;
+    private Retrofit _retrofit;
 
     public static NetworkService getInstance() {
         if (INSTANCE == null) {
@@ -17,14 +17,14 @@ public class NetworkService {
     }
 
     private NetworkService(){
-        retrofit = new Retrofit.Builder()
+        _retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.MAIN_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
     public ZimadAPI getZimadApi(){
-        return retrofit.create(ZimadAPI.class);
+        return _retrofit.create(ZimadAPI.class);
     }
 
 }

@@ -8,9 +8,9 @@ import android.view.View;
 
 public class AttractionsRecyclerView extends RecyclerView {
 
-    private View mEmptyView;
+    private View _emptyView;
 
-    private AdapterDataObserver mDataObserver = new AdapterDataObserver() {
+    private AdapterDataObserver _dataObserver = new AdapterDataObserver() {
         @Override
         public void onChanged() {
             super.onChanged();
@@ -49,26 +49,26 @@ public class AttractionsRecyclerView extends RecyclerView {
      *
      */
     public void setEmptyView(View emptyView) {
-        mEmptyView = emptyView;
+        _emptyView = emptyView;
         updateEmptyView();
     }
 
     @Override
     public void setAdapter(Adapter adapter) {
         if (getAdapter() != null) {
-            getAdapter().unregisterAdapterDataObserver(mDataObserver);
+            getAdapter().unregisterAdapterDataObserver(_dataObserver);
         }
         if (adapter != null) {
-            adapter.registerAdapterDataObserver(mDataObserver);
+            adapter.registerAdapterDataObserver(_dataObserver);
         }
         super.setAdapter(adapter);
         updateEmptyView();
     }
 
     private void updateEmptyView() {
-        if (mEmptyView != null && getAdapter() != null) {
+        if (_emptyView != null && getAdapter() != null) {
             boolean showEmptyView = getAdapter().getItemCount() == 0;
-            mEmptyView.setVisibility(showEmptyView ? VISIBLE : GONE);
+            _emptyView.setVisibility(showEmptyView ? VISIBLE : GONE);
             setVisibility(showEmptyView ? GONE : VISIBLE);
         }
     }

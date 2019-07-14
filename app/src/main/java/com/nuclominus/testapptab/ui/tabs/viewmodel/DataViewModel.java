@@ -13,10 +13,13 @@ import java.util.List;
 
 public class DataViewModel extends ViewModel {
 
-    private MutableLiveData<List<IDataModel>> liveDataCats = new MutableLiveData<>();
-    private MutableLiveData<List<IDataModel>> liveDataDogs = new MutableLiveData<>();
+    private MutableLiveData<List<IDataModel>> _liveDataCats = new MutableLiveData<>();
+    private MutableLiveData<List<IDataModel>> _liveDataDogs = new MutableLiveData<>();
 
-    public void loadDate(int dataType) {
+    public void loadData(int dataType) {
+        List<IDataModel> data = getLiveData(dataType).getValue();
+        if (data != null && !data.isEmpty()) return;
+
         ApiManager.getDataByType(dataType, new DataCallback() {
             @Override
             public void complete(List<IDataModel> data) {
@@ -37,10 +40,10 @@ public class DataViewModel extends ViewModel {
     public MutableLiveData<List<IDataModel>> getLiveData(int type) {
         switch (type) {
             case DataType.CAT:
-                return liveDataCats;
+                return _liveDataCats;
 
             case DataType.DOG:
-                return liveDataDogs;
+                return _liveDataDogs;
 
             default:
                 return null;

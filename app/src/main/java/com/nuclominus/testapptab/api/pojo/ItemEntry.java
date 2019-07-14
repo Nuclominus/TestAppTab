@@ -6,24 +6,24 @@ import com.google.gson.annotations.SerializedName;
 public class ItemEntry {
     @SerializedName("url")
     @Expose
-    private String url;
+    private String _url;
     @SerializedName("title")
     @Expose
-    private String title;
+    private String _title;
 
     public String getUrl() {
-        return url;
+        return _url;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        _url = url;
     }
 
     public String getTitle() {
-        return title;
+        return _title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        _title = title;
     }
 }
