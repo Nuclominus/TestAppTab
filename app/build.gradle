@@ -32,6 +32,7 @@ android {
 
         release {
             minifyEnabled false
+            buildConfigField "String", "MAIN_URL", '"http://kot3.com/xim/api.php/"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
