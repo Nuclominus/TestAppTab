@@ -14,7 +14,6 @@ public class AdapterListData extends AbstractSimpleAdapter<IViewData, IViewFacto
 
     public AdapterListData(IViewFactoryDataList iViewFactoryData) {
         super(iViewFactoryData, 100);
-        setHasStableIds(false);
     }
 
     @Override

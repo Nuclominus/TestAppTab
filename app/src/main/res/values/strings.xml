@@ -5,4 +5,5 @@
     <string name="dog">dog</string>
     <string name="cat">cat</string>
     <string name="image_for_data">Image for data</string>
+    <string name="image_item">Image item</string>
 </resources>

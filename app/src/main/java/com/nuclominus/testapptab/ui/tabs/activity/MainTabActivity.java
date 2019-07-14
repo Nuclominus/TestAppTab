@@ -18,7 +18,7 @@ public class MainTabActivity extends ActivityBase implements TabLayout.OnTabSele
     private static final String ACTIVE_TAB = "active_tab";
     public static final String TAB_FRAGMENT_LIST_CATS = "tab_fragment_list_cats";
     public static final String TAB_FRAGMENT_LIST_DOG = "tab_fragment_list_dog";
-    public static final String TAB_FRAGMENT_DETAILS = "tab_fragment_details";
+
 
     private DataViewModel _vm;
     private TabLayout _tabLayout;

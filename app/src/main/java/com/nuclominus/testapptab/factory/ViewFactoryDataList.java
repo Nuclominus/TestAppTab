@@ -9,8 +9,8 @@ import com.nuclominus.testapptab.view_controller.ViewData;
 
 public class ViewFactoryDataList implements IViewFactoryDataList {
     public final static int VIEW_ALL = 0;
-    private final static int VIEW_CAT = 1;
-    private final static int VIEW_DOG = 2;
+//    private final static int VIEW_CAT = 1;
+//    private final static int VIEW_DOG = 2;
 
     private final ViewData.ViewDataCallBack _callBack;
 
@@ -20,15 +20,17 @@ public class ViewFactoryDataList implements IViewFactoryDataList {
 
     @Override
     public IViewData create(ViewGroup parent, int viewType) {
-        IViewData result = null;
-        switch (viewType){
-            case VIEW_CAT:
-            case VIEW_DOG:
-                result = new ViewData(parent, R.layout.list_item, _callBack);
-        }
-        return result;
+//        IViewData result = null;
+//        switch (viewType) {
+//            case VIEW_ALL:
+//            case VIEW_CAT:
+//            case VIEW_DOG:
+//                result = new ViewData(parent, R.layout.list_item, _callBack);
+//                break;
+//        }
+//        return result;
         // or since we have the same twist for both lists.
-//        return new ViewData(parent, R.layout.list_item, _callBack);
+        return new ViewData(parent, R.layout.list_item, _callBack);
     }
 
     @Override

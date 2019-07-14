@@ -1,12 +1,18 @@
 package com.nuclominus.testapptab.base;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
 import com.nuclominus.testapptab.ui.tabs.viewmodel.DataViewModel;
+import com.nuclominus.testapptab.utility.Functions;
 
 public class FragmentTabsBase extends Fragment {
 
@@ -92,22 +98,6 @@ public class FragmentTabsBase extends Fragment {
         return (T) _activityCallback;
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T getParentCallback() {
-        Fragment parentFragment = getParentFragment();
-        if (parentFragment == null) {
-            return getActivityCallback();
-        }
-
-        try {
-            return (T) parentFragment;
-        } catch (Exception ex) {
-            //nothing to do
-        }
-        return null;
-    }
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -117,6 +107,20 @@ public class FragmentTabsBase extends Fragment {
             }
         } catch (Exception ex) {
             //nothing to do
+        }
+    }
+
+    public final void startActivityWithTransition(Functions.IF1<Intent, Activity> factory){
+        FragmentActivity activity = getActivity();
+        if(activity == null) return;
+
+        Intent intent = factory.call(activity);
+        if(intent == null) return;
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+        }else{
+            activity.startActivity(intent);
         }
     }
 

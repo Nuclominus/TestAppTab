@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import com.nuclominus.testapptab.base.FragmentTabsBase;
 import com.nuclominus.testapptab.base.TabFragmentAdapterBase;
 import com.nuclominus.testapptab.ui.tabs.activity.MainTabActivity;
+import com.nuclominus.testapptab.ui.tabs.fragments.FragmentDetails;
 import com.nuclominus.testapptab.ui.tabs.fragments.FragmentList;
 
 public class MainTabAdapter extends TabFragmentAdapterBase {
@@ -21,9 +22,6 @@ public class MainTabAdapter extends TabFragmentAdapterBase {
             case MainTabActivity.TAB_FRAGMENT_LIST_CATS:
             case MainTabActivity.TAB_FRAGMENT_LIST_DOG:
                 result = new FragmentList();
-                break;
-            case MainTabActivity.TAB_FRAGMENT_DETAILS:
-                // result = new FragmentDetails();
                 break;
         }
         if (result != null) {

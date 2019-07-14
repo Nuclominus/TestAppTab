@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import com.nuclominus.testapptab.base.AttractionsRecyclerView;
 import com.nuclominus.testapptab.base.FragmentTabsBase;
 import com.nuclominus.testapptab.factory.ViewFactoryDataList;
 import com.nuclominus.testapptab.model.IDataModel;
+import com.nuclominus.testapptab.ui.tabs.activity.ActivityDetails;
 import com.nuclominus.testapptab.ui.tabs.viewmodel.DataViewModel;
 import com.nuclominus.testapptab.utility.EventArgs;
 import com.nuclominus.testapptab.view_controller.ViewData;
@@ -86,6 +86,8 @@ public class FragmentList extends FragmentTabsBase implements ViewData.ViewDataC
 
     @Override
     public void onItemClick(IDataModel model) {
-        Log.d("OPEN DETAILS", "OPEN");
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(EventArgs.DetailsArgs, model);
+        startActivityWithTransition(activity -> ActivityDetails.createIntent(getContext(), bundle));
     }
 }
