@@ -1,6 +1,7 @@
 package com.nuclominus.testapptab.ui.tabs.fragments;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nuclominus.testapptab.R;
 import com.nuclominus.testapptab.adapter.AdapterListData;
@@ -58,11 +60,16 @@ public class FragmentList extends FragmentTabsBase implements ViewData.ViewDataC
     private void initViews(View view) {
         _adapter = new AdapterListData(new ViewFactoryDataList(this));
         _recyclerView = view.findViewById(R.id.dataList);
-        _recyclerView.setEmptyView(view.findViewById(R.id.emptyListText));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(_recyclerView.getContext());
+
+        Context context = _recyclerView.getContext();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         _recyclerView.setLayoutManager(layoutManager);
         _recyclerView.setItemViewCacheSize(40);
         _recyclerView.setAdapter(_adapter);
+
+        TextView emptyView = view.findViewById(R.id.emptyListText);
+        emptyView.setText(context.getString(R.string.empty_text));
+        _recyclerView.setEmptyView(emptyView);
     }
 
     @Override

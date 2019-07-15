@@ -6,4 +6,5 @@
     <string name="cat">cat</string>
     <string name="image_for_data">Image for data</string>
     <string name="image_item">Image item</string>
+    <string name="empty_text">There are no elements in this list</string>
 </resources>

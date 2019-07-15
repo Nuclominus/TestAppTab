@@ -3,11 +3,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.nuclominus.testapptab.base.AttractionsRecyclerView
-        android:id="@+id/dataList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <TextView
         android:id="@+id/emptyListText"
         android:layout_width="match_parent"
@@ -16,6 +11,11 @@
         android:padding="10dp"
         android:textColor="@android:color/black"
         android:textSize="14sp"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
+
+    <com.nuclominus.testapptab.base.AttractionsRecyclerView
+        android:id="@+id/dataList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
