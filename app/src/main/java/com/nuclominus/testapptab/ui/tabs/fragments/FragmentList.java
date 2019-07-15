@@ -58,6 +58,7 @@ public class FragmentList extends FragmentTabsBase implements ViewData.ViewDataC
     private void initViews(View view) {
         _adapter = new AdapterListData(new ViewFactoryDataList(this));
         _recyclerView = view.findViewById(R.id.dataList);
+        _recyclerView.setEmptyView(view.findViewById(R.id.emptyListText));
         LinearLayoutManager layoutManager = new LinearLayoutManager(_recyclerView.getContext());
         _recyclerView.setLayoutManager(layoutManager);
         _recyclerView.setItemViewCacheSize(40);
